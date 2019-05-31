@@ -1,4 +1,4 @@
-# arduino2cpp
+# ino2cpp
 Convert Arduino INO sketches to C++
 
 # Abstract
