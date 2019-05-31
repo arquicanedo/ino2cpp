@@ -11,6 +11,30 @@ There are three steps in this conversion [1][2]:
 3. **Write C++ to disk**. Write the resulting C++ file to disk.
 
 # Usage Example
+```
+$ python ino2cpp.py examples/*.ino -o output
+writing to output/1.cpp
+writing to output/2.cpp
+$ ls output/
+1.cpp 1.h   2.cpp 2.h
+$ cat output/1.h
+void updateScale();
+void isrEncoder();
+void isrSwitch();
+void setup();
+void loop();
+void precrtajScale();
+$ head -2 output/1.cpp 
+#include <Arduino.h>
+#include "1.h"
+```
+
+The generated C++ files can now be statically analyzed. For example, using clang to dump the AST as follows:
+
+```
+clang -Xclang -ast-dump -x c++ -fsyntax-only -D__AVR_ATmega328P__ -DARDUINO=100 -DF_CPU=16000000L -Wno-unknown-attributes -Wno-attributes -I/path/to/local/Arduino/JavaAppAndIncludedLibraries output/1.cpp
+```
+![clang ast](figures/clang_ast.png)
 
 
 # References
