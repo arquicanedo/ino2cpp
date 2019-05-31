@@ -29,7 +29,9 @@ $ head -2 output/1.cpp
 #include "1.h"
 ```
 
-The generated C++ files can now be statically analyzed. For example, using clang to dump the AST as follows:
+The generated C++ files can be parse and semantically analyzed. The full output of clang's pre-processor and semantic analysis can be found [here](output/1.full.txt).
+
+Similarly, clang's AST dump is as follows:
 
 ```
 clang -Xclang -ast-dump -x c++ -fsyntax-only -D__AVR_ATmega328P__ -DARDUINO=100 -DF_CPU=16000000L -Wno-unknown-attributes -Wno-attributes -I/path/to/local/Arduino/JavaAppAndIncludedLibraries output/1.cpp
